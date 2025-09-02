@@ -129,7 +129,7 @@ dmypy.json
 .pyre/
 
 
-
+# 20250901に追加
 
 # Django collected static files
 staticfiles/
