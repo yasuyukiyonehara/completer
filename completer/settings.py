@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -39,9 +40,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # ここから新規appの記載
-    'accounts'
-    'posts'
-    'follows'
+    'accounts',
+    'posts',
+    'follows',
 ]
 
 
@@ -58,10 +59,14 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'completer.urls'
 
+
+
+
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -128,3 +133,18 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+#認証要の設定
+LOGIN_REDIRECT_URL = "home" #ログイン後のリダイレクト先
+LOGOUT_REDIRECT_URL = "login" #ログアウト後のリダイレクト先
+
+
+# メールアドレスでログインをする
+AUTHENTICATION_BACKENDS = [
+    "django.contrib.auth.backends.ModelBackend",
+]
+
+# ユーザー名を使わずメールアドレスでログインしたい場合はカスタムUserモデル推奨
+
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
