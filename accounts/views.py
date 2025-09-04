@@ -1,14 +1,14 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login
+from .forms import CustomUserCreationForm  # ← これを使う
 
 def signup(request):
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
+        form = CustomUserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            login(request, user)
-            return redirect("home")
+            login(request, user)  # 新規作成したユーザーでログイン
+            return redirect("home")  # ログイン後に移動するページ
     else:
-            form = UserCreationForm()    
+        form = CustomUserCreationForm()
     return render(request, "accounts/signup.html", {"form": form})

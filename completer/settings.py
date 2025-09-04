@@ -146,5 +146,6 @@ AUTHENTICATION_BACKENDS = [
 
 # ユーザー名を使わずメールアドレスでログインしたい場合はカスタムUserモデル推奨
 
-
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+AUTH_USER_MODEL =  "accounts.CustomUser"
