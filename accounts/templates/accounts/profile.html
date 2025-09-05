@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{ profile_user.username }}のマイページ</title>
+    </head>
+    <body>
+        <h1>{{ profile_user.username }}</h1>
+        <p>Email: {{ profile_user.email }}</p>
+
+        <h2>投稿一覧</h2>
+        <ul>
+            {% for post in posts %}
+                <li>{{ post.content }} ({{ post.created_at }})</li>
+            {% empty %}
+                <li>まだ投稿がありません。</li>
+            {% endfor %}
+        </ul>
+    </body>
+</html>
