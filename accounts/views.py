@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
-from .forms import CustomUserCreationForm  # ← これを使う
+from .forms import CustomUserCreationForm
+from django.contrib.auth import get_user_model
 
 def signup(request):
     if request.method == "POST":
@@ -12,3 +13,9 @@ def signup(request):
     else:
         form = CustomUserCreationForm()
     return render(request, "accounts/signup.html", {"form": form})
+
+def profile(request, username):
+    user = get_object_or_404(User, username=username)
+
+    post = user.post_set.all()
+    return render(request, "accounts/profile.html", {"profile_user": user, "posts": posts})
